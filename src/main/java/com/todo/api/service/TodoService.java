@@ -36,6 +36,9 @@ public class TodoService {
     }
 
     public void delete(Long id) {
+        if (!todoRepository.existsById(id)) {
+            throw new RuntimeException("Todoが見つかりません。");
+        }
         todoRepository.deleteById(id);
     }
 }
