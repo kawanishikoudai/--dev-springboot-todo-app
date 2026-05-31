@@ -34,3 +34,6 @@ jobs:
 
       - name: Run tests
         run: ./mvnw test
+        env:
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
