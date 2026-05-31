@@ -1,0 +1,15 @@
+CREATE TABLE users (
+    id         BIGSERIAL PRIMARY KEY,
+    email      VARCHAR(255) NOT NULL UNIQUE,
+    created_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE otp (
+    id         BIGSERIAL PRIMARY KEY,
+    email      VARCHAR(255) NOT NULL,
+    code       VARCHAR(6)   NOT NULL,
+    expired_at TIMESTAMP    NOT NULL,
+    created_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE todo ADD COLUMN user_id BIGINT REFERENCES users(id);

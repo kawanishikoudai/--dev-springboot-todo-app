@@ -96,8 +96,8 @@ public class TodoIntegrationTest {
         Todo todo = new Todo();
         todo.setTitle("");
 
-        assertThatThrownBy(() -> todoService.create(todo)).isInstanceOf(
-            Exception.class
-        );
+        assertThatThrownBy(() ->
+            todoService.create("test@example.com", todo)
+        ).isInstanceOf(Exception.class);
     }
 }

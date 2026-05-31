@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,8 +17,10 @@ public class TodoController {
     private final TodoService todoService;
 
     @GetMapping
-    public List<Todo> findAll() {
-        return todoService.findAll();
+    public ResponseEntity<List<Todo>> findAll(
+        @AuthenticationPrincipal String email
+    ) {
+        return ResponseEntity.ok(todoService.findAll(email));
     }
 
     @GetMapping("/{id}")
@@ -26,8 +29,11 @@ public class TodoController {
     }
 
     @PostMapping
-    public ResponseEntity<Todo> create(@Valid @RequestBody Todo todo) {
-        return ResponseEntity.status(201).body(todoService.create(todo));
+    public ResponseEntity<Todo> create(
+        @AuthenticationPrincipal String email,
+        @Valid @RequestBody Todo todo
+    ) {
+        return ResponseEntity.status(201).body(todoService.create(email, todo));
     }
 
     @PutMapping("/{id}")
