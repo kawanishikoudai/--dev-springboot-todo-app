@@ -90,4 +90,14 @@ public class TodoIntegrationTest {
             RuntimeException.class
         );
     }
+
+    @Test
+    void タイトルが空の場合TODO作成できないこと() {
+        Todo todo = new Todo();
+        todo.setTitle("");
+
+        assertThatThrownBy(() -> todoService.create(todo)).isInstanceOf(
+            Exception.class
+        );
+    }
 }

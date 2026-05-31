@@ -1,6 +1,7 @@
 package com.todo.api.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Data;
@@ -15,6 +16,7 @@ public class Todo {
     private long id;
 
     @Column(nullable = false)
+    @NotBlank(message = "タイトルは必須です")
     private String title;
 
     private String category;

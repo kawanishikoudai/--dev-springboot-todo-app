@@ -2,6 +2,7 @@ package com.todo.api.controller;
 
 import com.todo.api.entity.Todo;
 import com.todo.api.service.TodoService;
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class TodoController {
     }
 
     @PostMapping
-    public ResponseEntity<Todo> create(@RequestBody Todo todo) {
+    public ResponseEntity<Todo> create(@Valid @RequestBody Todo todo) {
         return ResponseEntity.status(201).body(todoService.create(todo));
     }
 
