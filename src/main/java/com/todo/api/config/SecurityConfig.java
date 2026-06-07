@@ -26,6 +26,11 @@ public class SecurityConfig {
                 auth
                     .requestMatchers("/api/auth/**")
                     .permitAll()
+                    .requestMatchers(
+                        org.springframework.http.HttpMethod.OPTIONS,
+                        "/**"
+                    )
+                    .permitAll()
                     .anyRequest()
                     .authenticated()
             )
